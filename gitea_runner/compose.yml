@@ -7,23 +7,26 @@ services:
     image: alpine:latest
     container_name: gitea_runner_init
     command: >
-      sh -c "ls -la"
+      sh -c "cp /source/config.yaml /config/config.yaml && mkdir -p /data/data"
     restart: "no"
     volumes:
       - .:/source
+      - gitea-runner-data:/data
+      - gitea-runner-config:/config
   runner:
     image: docker.io/gitea/act_runner:latest
     container_name: gitea_runner
     environment:
-      CONFIG_FILE: /config.yaml
       GITEA_INSTANCE_URL: "${GITEA_INSTANCE_URL}"
       GITEA_RUNNER_REGISTRATION_TOKEN: "${REGISTRATION_TOKEN}"
+      CONFIG_FILE: /config/config.yaml
     volumes:
-      - ./data:/data
-      - ./config.yaml:/config.yaml
+      - gitea-runner-data:/data
+      - gitea-runner-config:/config
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - init
 
 volumes:
-  gitea-runner-data:
+  - gitea-runner-data:
+  - gitea-runner-config:
