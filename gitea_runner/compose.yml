@@ -7,10 +7,10 @@ services:
     image: alpine:latest
     container_name: gitea_runner_init
     command: >
-      sh -c "cp /source/config.yaml /config/config.yaml && mkdir -p /data/data"
+      sh -c "ls /source && cp /source/config.yaml /config/config.yaml && mkdir -p /data/data"
     restart: "no"
     volumes:
-      - .:/source
+      - ./:/source
       - gitea-runner-data:/data
       - gitea-runner-config:/config
   runner:
