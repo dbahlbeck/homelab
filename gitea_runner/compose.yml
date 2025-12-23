@@ -6,8 +6,6 @@ services:
   init:
     image: alpine:latest
     container_name: gitea_runner_init
-    command: >
-      sh -c "ls -l /source"
     restart: "no"
     volumes:
       - ./:/source
