@@ -1,10 +1,19 @@
 services:
   init:
     image: eclipse-mosquitto:latest
-    command: mosquitto_passwd -c -b /mosquitto/config/pwfile ${username} ${password}
+    command: "mosquitto_passwd -c -b /mosquitto/config/pwfile ${username} ${password}"
     restart: "no"
     volumes:
       - mosquitto-data:/mosquitto
+
+  clone:
+    image: alpine/git
+    command: >
+      sh -c "git clone https://github.com/dbahlbeck/homelab.git /tmp/repo &&
+      cp -r /tmp/repo/mqtt/* /config"
+    volumes:
+      - mosquitto-data:/config
+
 
   mosquitto:
     image: eclipse-mosquitto:latest
@@ -17,6 +26,7 @@ services:
     restart: unless-stopped
     depends_on:
       - init
+      - clone
 
 volumes:
   mosquitto-data:
