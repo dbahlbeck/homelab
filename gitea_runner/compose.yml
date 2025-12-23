@@ -4,20 +4,18 @@ networks:
 
 services:
   init:
-    image: alpine:latest
-    container_name: gitea_runner_init
-    restart: "no"
+    image: alpine/git
+    command: clone https://github.com/dbahlbeck/homelab.git /config
     volumes:
-      - ./:/source
-      - gitea-runner-data:/data
-      - gitea-runner-config:/config
+      - config-data:/config
+
   runner:
     image: docker.io/gitea/act_runner:latest
     container_name: gitea_runner
     environment:
       GITEA_INSTANCE_URL: "${GITEA_INSTANCE_URL}"
       GITEA_RUNNER_REGISTRATION_TOKEN: "${REGISTRATION_TOKEN}"
-      CONFIG_FILE: /config/config.yaml
+      CONFIG_FILE: /config/gitea_runner/config.yaml
     volumes:
       - /:/source
       - gitea-runner-data:/data
@@ -28,4 +26,4 @@ services:
 
 volumes:
   gitea-runner-data:
-  gitea-runner-config:
+  config-data:
