@@ -1,0 +1,23 @@
+services:
+  init:
+    image: eclipse-mosquitto:latest
+    command: mosquitto_password -c -b /mosquitto/config/pwfile ${username} ${password}
+    restart: "no"
+    volumes:
+      - mosquitto-data:/mosquitto
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    ports:
+      - "1884:1883"
+      - "9001:9001"
+    volumes:
+      - mosquitto-data:/mosquitto
+    restart: unless-stopped
+    depends_on:
+      - init
+
+volumes:
+  mosquitto-data:
+    external: true
