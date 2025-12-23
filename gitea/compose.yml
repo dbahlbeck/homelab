@@ -2,6 +2,10 @@ networks:
   gitea:
     external: false
 
+volumes:
+  gitea-data:
+    external: true
+
 services:
   server:
     image: docker.gitea.com/gitea:latest
@@ -13,7 +17,7 @@ services:
     networks:
       - gitea
     volumes:
-      - ./data:/data
+      - data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     ports:
