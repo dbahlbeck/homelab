@@ -8,6 +8,7 @@ services:
 
   clone:
     image: alpine/git
+    entrypoint: sh
     command: >
       sh -c "git clone https://github.com/dbahlbeck/homelab.git /tmp/repo &&
       cp -r /tmp/repo/mqtt/* /config"
