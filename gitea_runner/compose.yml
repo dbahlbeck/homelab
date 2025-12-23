@@ -19,7 +19,7 @@ services:
       GITEA_RUNNER_REGISTRATION_TOKEN: "${REGISTRATION_TOKEN}"
       CONFIG_FILE: /config/config.yaml
     volumes:
-      - ./config.yaml:/source/config.yaml
+      - /:/source
       - gitea-runner-data:/data
       - gitea-runner-config:/config
       - /var/run/docker.sock:/var/run/docker.sock
