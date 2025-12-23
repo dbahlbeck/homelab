@@ -1,7 +1,7 @@
 services:
   init:
     image: eclipse-mosquitto:latest
-    command: mosquitto_password -c -b /mosquitto/config/pwfile ${username} ${password}
+    command: mosquitto_passwd -c -b /mosquitto/config/pwfile ${username} ${password}
     restart: "no"
     volumes:
       - mosquitto-data:/mosquitto
