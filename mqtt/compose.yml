@@ -6,16 +6,6 @@ services:
     volumes:
       - mosquitto-data:/mosquitto
 
-  clone:
-    image: alpine/git
-    entrypoint: sh
-    command: >
-      git clone https://github.com/dbahlbeck/homelab.git /tmp/repo &&
-      cp -r /tmp/repo/mqtt/* /config
-    volumes:
-      - mosquitto-data:/config
-
-
   mosquitto:
     image: eclipse-mosquitto:latest
     container_name: mosquitto
