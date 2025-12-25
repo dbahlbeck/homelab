@@ -10,8 +10,8 @@ services:
     image: alpine/git
     entrypoint: sh
     command: >
-      sh -c "git clone https://github.com/dbahlbeck/homelab.git /tmp/repo &&
-      cp -r /tmp/repo/mqtt/* /config"
+      git clone https://github.com/dbahlbeck/homelab.git /tmp/repo &&
+      cp -r /tmp/repo/mqtt/* /config
     volumes:
       - mosquitto-data:/config
 
