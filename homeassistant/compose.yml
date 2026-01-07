@@ -7,14 +7,14 @@ services:
       - ha_config:/config
     command: sh -c "apk add --no-cache git && git clone https://github.com/dbahlbeck/homelab.git /tmp/repo && mkdir -p /config/config && cp /tmp/repo/homeassistant/configuration.yaml /config/config/"
 
-#  homeassistant:
-#    image: ghcr.io/home-assistant/home-assistant:stable
-#    container_name: homeassistant
-#    restart: unless-stopped
-#    volumes:
-#      - ha_config:/config
-#      - /etc/localtime:/etc/localtime:ro
-#    ports:
-#      - "8123:8123"
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    volumes:
+      - ha_config:/config
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "8123:8123"
 volumes:
   ha_config:
