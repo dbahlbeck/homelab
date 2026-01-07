@@ -1,0 +1,25 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy:v2.13.0
+    container_name: ntfy
+    command: serve
+    restart: unless-stopped
+    environment:
+      NTFY_UPSTREAM_BASE_URL: https://ntfy.sh
+      NTFY_BASE_URL: ${NTFY_BASE_URL}
+      NTFY_AUTH_DEFAULT_ACCESS: deny-all
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+      NTFY_ENABLE_LOGIN: true
+      NTFY_CACHE_FILE: /var/cache/ntfy/cache.db
+      NTFY_AUTH_FILE: /etc/ntfy/auth.db
+    ports:
+      - "8166:80"
+    volumes:
+      - ntfy_cache:/var/cache/ntfy
+      - ntfy_config:/etc/ntfy
+    labels:
+      runtipi.managed: true
+      runtipi.appurn: ntfy:migrated
+volumes:
+  ntfy_cache:
+  ntfy_config:
