@@ -1,10 +1,18 @@
 services:
   init:
     image: alpine
-    command: cp homeassistant/configuration.yaml /config/config/
+    container_name: ha-init
     restart: no
     volumes:
       - ha_config:/config
+    entrypoint: ["/bin/sh", "-c"]
+    command: |
+      set -e
+      apk add --no-cache git
+      git clone https://github.com/dbahlbeck/homelab.git /tmp/repo
+      mkdir -p /config/config
+      cp /tmp/repo/homeassistant/configuration.yaml /config/config/
+      echo "Init complete"
 
 #  homeassistant:
 #    image: ghcr.io/home-assistant/home-assistant:stable
