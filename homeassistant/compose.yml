@@ -6,11 +6,11 @@ services:
     volumes:
       - ha_config:/config
     entrypoint: ["/bin/sh", "-c"]
-    command: |
-      apk add --no-cache git
-      git clone https://github.com/dbahlbeck/homelab.git /tmp/repo
-      mkdir -p /config/config
-      cp /tmp/repo/homeassistant/configuration.yaml /config/config/
+    command:
+      apk add --no-cache git && 
+      git clone https://github.com/dbahlbeck/homelab.git /tmp/repo && 
+      mkdir -p /config/config &&
+      cp /tmp/repo/homeassistant/configuration.yaml /config/config/ &&
       echo "Init complete"
 
 #  homeassistant:
