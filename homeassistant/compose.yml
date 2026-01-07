@@ -7,7 +7,6 @@ services:
       - ha_config:/config
     entrypoint: ["/bin/sh", "-c"]
     command: |
-      set -e
       apk add --no-cache git
       git clone https://github.com/dbahlbeck/homelab.git /tmp/repo
       mkdir -p /config/config
