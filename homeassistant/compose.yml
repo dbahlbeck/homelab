@@ -1,12 +1,19 @@
 services:
-  homeassistant:
-    image: ghcr.io/home-assistant/home-assistant:stable
-    container_name: homeassistant
-    restart: unless-stopped
+  init:
+    image: alpine
+    command: cp homeassistant/configuration.yaml /config/config/
+    restart: no
     volumes:
       - ha_config:/config
-      - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "8123:8123"
+
+#  homeassistant:
+#    image: ghcr.io/home-assistant/home-assistant:stable
+#    container_name: homeassistant
+#    restart: unless-stopped
+#    volumes:
+#      - ha_config:/config
+#      - /etc/localtime:/etc/localtime:ro
+#    ports:
+#      - "8123:8123"
 volumes:
   ha_config:
