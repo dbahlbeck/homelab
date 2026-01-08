@@ -10,6 +10,9 @@ services:
     ports:
       - "8123:8123"
     networks:
-      - ${NETWORK_NAME}
+      - homeassistant
 volumes:
   ha_config:
+
+networks:
+  homeassistant:
