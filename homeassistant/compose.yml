@@ -9,6 +9,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "8123:8123"
-
+    networks:
+      - ${NETWORK_NAME}
 volumes:
   ha_config:
