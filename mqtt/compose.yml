@@ -15,8 +15,14 @@ services:
     volumes:
       - mosquitto-data:/mosquitto
     restart: unless-stopped
+    networks:
+      - mosquitto
     depends_on:
       - init
+
+
+networks:
+  mosquitto:
 
 volumes:
   mosquitto-data:
