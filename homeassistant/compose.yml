@@ -1,12 +1,4 @@
 services:
-#  init:
-#    image: alpine
-#    container_name: ha-init
-#    restart: no
-#    volumes:
-#      - ha_config:/data
-#    command: sh -c "apk add --no-cache git && git clone https://github.com/dbahlbeck/homelab.git /tmp/repo && cp /tmp/repo/homeassistant/configuration.yaml /data/"
-
   homeassistant:
     image: ghcr.io/home-assistant/home-assistant:stable
     container_name: homeassistant
@@ -17,7 +9,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "8123:8123"
-#    depends_on:
-#      - init
+
 volumes:
   ha_config:
