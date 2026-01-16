@@ -1,0 +1,25 @@
+services:
+  satisfactory:
+    image: wolveix/satisfactory-server:latest
+    restart: unless-stopped
+    container_name: 'satisfactory-server'
+    environment:
+      MAXPLAYERS: 4
+      PGID: 1000
+      PUID: 1000
+      STEAMBETA: false
+    deploy:
+      resources:
+        limits:
+          memory: 15G
+        reservations:
+          memory: 4G
+    ports:
+      - '7777:7777/tcp'
+      - '7777:7777/udp'
+      - '8888:8888/tcp'
+    volumes:
+      - 'satisfactory-data:/config'
+
+volumes:
+  satisfactory-data:
